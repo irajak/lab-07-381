@@ -1,3 +1,6 @@
+// Iraj Akbar (30146997)
+// Azlfa Anwar (30176659)
+
 import React, { useState } from 'react';
 import './App.css';
 
