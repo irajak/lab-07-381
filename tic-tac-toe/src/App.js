@@ -1,6 +1,5 @@
 // Iraj Akbar (30146997)
 // Azlfa Anwar (30176659)
-
 import React, { useState } from 'react';
 import './App.css';
 
@@ -25,7 +24,15 @@ function Board() {
   }
 
   const winner = calculateWinner(squares);
-  const status = winner ? `Winner: ${winner}` : `Next player: ${xIsNext ? 'X' : 'O'}`;
+  const isDraw = isBoardFull(squares) && !winner;
+  let status;
+  if (winner) {
+    status = `Winner: ${winner}`;
+  } else if (isDraw) {
+    status = "No winner.";
+  } else {
+    status = `Next player: ${xIsNext ? 'X' : 'O'}`;
+  }
 
   return (
     <div>
@@ -51,9 +58,9 @@ function Board() {
 
 function calculateWinner(squares) {
   const lines = [
-    [0, 1, 2], [3, 4, 5], [6, 7, 8],  // row
-    [0, 3, 6], [1, 4, 7], [2, 5, 8],  // column
-    [0, 4, 8], [2, 4, 6],             // diagonal
+    [0, 1, 2], [3, 4, 5], [6, 7, 8],  // rows
+    [0, 3, 6], [1, 4, 7], [2, 5, 8],  // columns
+    [0, 4, 8], [2, 4, 6],             // diagonals
   ];
   for (let i = 0; i < lines.length; i++) {
     const [a, b, c] = lines[i];
@@ -62,6 +69,10 @@ function calculateWinner(squares) {
     }
   }
   return null;
+}
+
+function isBoardFull(squares) {
+  return squares.every((square) => square !== null);
 }
 
 export default function App() {
